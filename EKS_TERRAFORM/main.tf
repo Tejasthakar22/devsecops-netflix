@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "example" {
-  name               = "eks-cluster-cloud"
+  name               = "eks-cluster-cloud1"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -42,7 +42,7 @@ data "aws_subnet" "public" {
 
 # Cluster Provisioning
 resource "aws_eks_cluster" "example" {
-  name     = "EKS_CLUSTER"
+  name     = "EKS_CLUSTER1"
   role_arn = aws_iam_role.example.arn
 
   vpc_config {
@@ -90,7 +90,7 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEC2ContainerRegistryRea
 # Create Node Group
 resource "aws_eks_node_group" "example" {
   cluster_name    = aws_eks_cluster.example.name
-  node_group_name = "Node-cloud"
+  node_group_name = "Node-cloud1"
   node_role_arn   = aws_iam_role.example1.arn
   subnet_ids      = data.aws_subnets.public.ids
 
